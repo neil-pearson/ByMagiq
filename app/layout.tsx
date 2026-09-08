@@ -34,6 +34,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  icons: {
+    icon: [{ url: "/bymagiq-favicon.svg", type: "image/svg+xml" }],
+  },
   openGraph: {
     type: "website",
     siteName: "ByMagiq",

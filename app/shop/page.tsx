@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { supabase, type Prompt } from "@/lib/supabase";
-import { createCheckoutSession } from "./actions";
 
 export const metadata: Metadata = {
   title: "Shop — ByMagiq",
@@ -8,10 +7,6 @@ export const metadata: Metadata = {
     "Tested prompts for the workflows that actually compound — research, writing, and systems work.",
   alternates: { canonical: "/shop" },
 };
-
-function formatPrice(cents: number) {
-  return `£${(cents / 100).toFixed(2)}`;
-}
 
 export default async function ShopPage({
   searchParams,
@@ -78,19 +73,10 @@ export default async function ShopPage({
                   {p.description}
                 </p>
               </div>
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-sm text-ink/70">
-                  {formatPrice(p.price_cents)}
+              <div className="flex items-center justify-end">
+                <span className="font-mono text-[13px] uppercase tracking-wide text-ink/45">
+                  Coming soon
                 </span>
-                <form action={createCheckoutSession}>
-                  <input type="hidden" name="promptId" value={p.id} />
-                  <button
-                    type="submit"
-                    className="inline-flex items-center bg-ink px-4 py-2 text-sm font-medium text-paper transition-colors hover:bg-signal"
-                  >
-                    Buy
-                  </button>
-                </form>
               </div>
             </div>
           ))}
