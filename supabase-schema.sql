@@ -9,6 +9,8 @@ create table if not exists prompts (
   price_cents integer not null,
   stripe_price_id text,
   is_active boolean not null default true,
+  delivery_type text not null default 'text' check (delivery_type in ('text', 'file')),
+  delivery_content text,
   created_at timestamptz not null default now()
 );
 

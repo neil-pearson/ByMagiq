@@ -13,7 +13,7 @@ const makes = [
     href: "/latticaxon",
     title: "Latticaxon",
     description:
-      "The flagship product — a personal knowledge and project system that keeps context across sessions instead of starting from zero each time.",
+      "The flagship product — a free personal knowledge and project system that keeps context across sessions, with paid modules and playbooks available to extend it.",
   },
   {
     href: "/shop",

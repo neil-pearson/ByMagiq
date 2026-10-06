@@ -22,10 +22,11 @@ export default function ScriptingHorizonsPage() {
         long-form writing from a small cast of author personas, each with
         their own focus, from money management to systems thinking. It has
         its own site and its own catalogue, kept separate from the ByMagiq
-        product line.
+        product line. It&apos;s still a work in progress, so expect a few
+        rough edges as it comes together.
       </p>
       <Link
-        href="https://scrhoz.vercel.app"
+        href="https://scriptinghorizons.com"
         target="_blank"
         rel="noopener noreferrer"
         className="mt-8 inline-flex items-center bg-ink px-5 py-3 text-sm font-medium text-paper transition-colors hover:bg-signal"

@@ -25,6 +25,7 @@ export default function NewsletterPage() {
 
       <ConversionForm
         event="newsletter_signup"
+        group="newsletter"
         className="mt-8 flex max-w-md flex-col gap-3 sm:flex-row"
       >
         <label htmlFor="newsletter-email" className="sr-only">
@@ -45,9 +46,6 @@ export default function NewsletterPage() {
           Subscribe
         </button>
       </ConversionForm>
-      <p className="mt-3 font-mono text-[12px] uppercase tracking-wide text-ink/40">
-        Form isn&apos;t wired up yet — MailerLite integration pending
-      </p>
     </section>
   );
 }

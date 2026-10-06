@@ -46,6 +46,12 @@ export default function LatticaxonPage() {
           capture, process, and connect everything a solo builder is working
           on, across as many projects as you're juggling at once.
         </p>
+        <p className="mt-4 max-w-xl text-base leading-relaxed text-ink/55">
+          The base vault is free. Modules and playbooks that extend it —
+          writing systems, research workflows, and more — are sold
+          individually, with a few included free to show what the system can
+          do.
+        </p>
         <div className="mt-8 flex flex-wrap items-center gap-4">
           <a
             href="#waitlist"
@@ -118,6 +124,7 @@ export default function LatticaxonPage() {
           </h2>
           <ConversionForm
             event="waitlist_signup"
+            group="latticaxon-waitlist"
             className="mt-8 flex max-w-md flex-col gap-3 sm:flex-row"
           >
             <label htmlFor="email" className="sr-only">
@@ -138,9 +145,6 @@ export default function LatticaxonPage() {
               Join waitlist
             </button>
           </ConversionForm>
-          <p className="mt-3 font-mono text-[12px] uppercase tracking-wide text-paper/40">
-            Form isn&apos;t wired up yet — MailerLite integration pending
-          </p>
         </div>
       </section>
     </>
