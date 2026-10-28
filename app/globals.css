@@ -21,6 +21,10 @@
   --font-mono: var(--font-mono);
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   background: var(--paper);
   color: var(--ink);
