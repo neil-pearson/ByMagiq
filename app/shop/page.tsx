@@ -23,7 +23,7 @@ export default async function ShopPage({
 
   return (
     <section className="mx-auto max-w-5xl px-6 py-16 sm:py-24">
-      <p className="font-mono text-[13px] uppercase tracking-wide text-signal">
+      <p className="font-mono text-[15px] uppercase tracking-wide text-signal">
         Shop
       </p>
       <h1 className="mt-4 max-w-xl font-display text-3xl font-medium leading-[1.15] tracking-tight text-ink sm:text-4xl">
@@ -46,14 +46,14 @@ export default async function ShopPage({
       )}
 
       {error && (
-        <p className="mt-10 font-mono text-[13px] text-ink/50">
+        <p className="mt-10 font-mono text-[13px] text-ink/70">
           Couldn&apos;t load the shop right now — the prompts table may not
           be set up yet.
         </p>
       )}
 
       {!error && (!prompts || prompts.length === 0) && (
-        <p className="mt-10 font-mono text-[13px] text-ink/50">
+        <p className="mt-10 font-mono text-[13px] text-ink/70">
           Nothing listed yet.
         </p>
       )}
@@ -74,7 +74,7 @@ export default async function ShopPage({
                 </p>
               </div>
               <div className="flex items-center justify-end">
-                <span className="font-mono text-[13px] uppercase tracking-wide text-ink/45">
+                <span className="font-mono text-[13px] uppercase tracking-wide text-ink/70">
                   Coming soon
                 </span>
               </div>

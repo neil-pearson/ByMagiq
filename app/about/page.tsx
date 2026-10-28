@@ -22,10 +22,10 @@ const makes = [
       "Tested prompts for the workflows that actually compound, sold directly.",
   },
   {
-    href: "/scripting-horizons",
-    title: "Scripting Horizons",
+    href: "/scrhoz",
+    title: "Scrhoz",
     description:
-      "ByMagiq's publishing imprint — books and long-form writing, kept as its own site, linked from here.",
+      "Our companion site — simple prompts, sheets, systems and books, including the Scripting Horizons imprint.",
   },
   {
     href: "/exchange",
@@ -40,7 +40,7 @@ export default function AboutPage() {
     <>
       {/* Hero */}
       <section className="mx-auto max-w-5xl px-6 pb-16 pt-16 sm:pt-24">
-        <p className="font-mono text-[13px] uppercase tracking-wide text-signal">
+        <p className="font-mono text-[15px] uppercase tracking-wide text-signal">
           About
         </p>
         <h1 className="mt-4 max-w-2xl font-display text-4xl font-medium leading-[1.1] tracking-tight text-ink sm:text-5xl">
@@ -57,7 +57,7 @@ export default function AboutPage() {
       {/* What we're building */}
       <section className="border-t border-line">
         <div className="mx-auto max-w-5xl px-6 py-16">
-          <p className="font-mono text-[13px] uppercase tracking-wide text-ink/50">
+          <p className="font-mono text-[13px] uppercase tracking-wide text-ink/70">
             What we&apos;re building
           </p>
           <div className="mt-6 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2">
@@ -83,7 +83,7 @@ export default function AboutPage() {
       <section className="border-t border-line">
         <div className="mx-auto max-w-5xl px-6 py-16">
           <div className="grid gap-10 sm:grid-cols-[0.9fr_1.1fr]">
-            <p className="font-mono text-[13px] uppercase tracking-wide text-ink/50">
+            <p className="font-mono text-[13px] uppercase tracking-wide text-ink/70">
               How we build
             </p>
             <div className="max-w-xl">

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Articles — ByMagiq",
   description:
-    "Writing from ByMagiq and Scripting Horizons, published on Medium.",
+    "Writing from ByMagiq and Scrhoz, published on Medium.",
   alternates: { canonical: "/articles" },
 };
 
@@ -20,14 +20,14 @@ const authors = [
 export default function ArticlesPage() {
   return (
     <section className="mx-auto max-w-3xl px-6 py-16 sm:py-24">
-      <p className="font-mono text-[13px] uppercase tracking-wide text-signal">
+      <p className="font-mono text-[15px] uppercase tracking-wide text-signal">
         Read — Articles
       </p>
       <h1 className="mt-4 font-display text-3xl font-medium leading-[1.15] tracking-tight text-ink sm:text-4xl">
         Writing lives on Medium, not here.
       </h1>
       <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink/70">
-        ByMagiq and Scripting Horizons publish through Medium rather than a
+        ByMagiq and Scrhoz publish through Medium rather than a
         hosted blog. Pick an author below to read their latest.
       </p>
       <ul className="mt-10 divide-y divide-line border-y border-line">
@@ -42,7 +42,7 @@ export default function ArticlesPage() {
               <span className="font-display text-lg font-medium">
                 {a.name}
               </span>
-              <span className="font-mono text-[12px] uppercase tracking-wide text-ink/40">
+              <span className="font-mono text-[12px] uppercase tracking-wide text-ink/70">
                 Medium →
               </span>
             </a>

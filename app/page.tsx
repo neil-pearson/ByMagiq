@@ -18,12 +18,12 @@ const products = [
     cta: "Browse the shop",
   },
   {
-    href: "/scripting-horizons",
+    href: "/scrhoz",
     eyebrow: "Read",
-    title: "Scripting Horizons",
+    title: "Scrhoz",
     description:
-      "ByMagiq's publishing imprint — books and long-form writing from a small cast of author personas.",
-    cta: "Visit Scripting Horizons",
+      "Our companion site — simple prompts, sheets, systems and books, including the Scripting Horizons imprint.",
+    cta: "Visit Scrhoz",
   },
 ];
 
@@ -34,7 +34,7 @@ export default function Home() {
       <section className="mx-auto max-w-5xl px-6 pb-20 pt-16 sm:pt-24">
         <div className="grid gap-12 sm:grid-cols-[1.1fr_0.9fr] sm:items-center">
           <div>
-            <p className="font-mono text-[13px] uppercase tracking-wide text-signal">
+            <p className="font-mono text-base uppercase tracking-wide text-signal sm:text-lg">
               ByMagiq
             </p>
             <h1 className="mt-4 font-display text-4xl font-medium leading-[1.1] tracking-tight text-ink sm:text-5xl">
@@ -68,7 +68,7 @@ export default function Home() {
       {/* Products row */}
       <section className="border-t border-line">
         <div className="mx-auto max-w-5xl px-6 py-16">
-          <p className="font-mono text-[13px] uppercase tracking-wide text-ink/50">
+          <p className="font-mono text-[13px] uppercase tracking-wide text-ink/70">
             What ByMagiq makes
           </p>
           <div className="mt-6 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-3">

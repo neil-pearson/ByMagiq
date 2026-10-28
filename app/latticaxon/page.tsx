@@ -34,7 +34,7 @@ export default function LatticaxonPage() {
     <>
       {/* Hero */}
       <section className="mx-auto max-w-5xl px-6 pb-16 pt-16 sm:pt-24">
-        <p className="font-mono text-[13px] uppercase tracking-wide text-signal">
+        <p className="font-mono text-[15px] uppercase tracking-wide text-signal">
           Latticaxon
         </p>
         <h1 className="mt-4 max-w-2xl font-display text-4xl font-medium leading-[1.1] tracking-tight text-ink sm:text-5xl">
@@ -46,7 +46,7 @@ export default function LatticaxonPage() {
           capture, process, and connect everything a solo builder is working
           on, across as many projects as you're juggling at once.
         </p>
-        <p className="mt-4 max-w-xl text-base leading-relaxed text-ink/55">
+        <p className="mt-4 max-w-xl text-base leading-relaxed text-ink/70">
           The base vault is free. Modules and playbooks that extend it —
           writing systems, research workflows, and more — are sold
           individually, with a few included free to show what the system can
@@ -59,7 +59,7 @@ export default function LatticaxonPage() {
           >
             Join the waitlist
           </a>
-          <span className="font-mono text-[12px] uppercase tracking-wide text-ink/45">
+          <span className="font-mono text-[12px] uppercase tracking-wide text-ink/70">
             Currently in testing — not yet publicly released
           </span>
         </div>
@@ -68,7 +68,7 @@ export default function LatticaxonPage() {
       {/* How it works */}
       <section className="border-t border-line">
         <div className="mx-auto max-w-5xl px-6 py-16">
-          <p className="font-mono text-[13px] uppercase tracking-wide text-ink/50">
+          <p className="font-mono text-[13px] uppercase tracking-wide text-ink/70">
             How it works
           </p>
           <div className="mt-6 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-3">
@@ -93,7 +93,7 @@ export default function LatticaxonPage() {
       <section className="border-t border-line">
         <div className="mx-auto max-w-5xl px-6 py-16">
           <div className="grid gap-10 sm:grid-cols-[0.9fr_1.1fr]">
-            <p className="font-mono text-[13px] uppercase tracking-wide text-ink/50">
+            <p className="font-mono text-[13px] uppercase tracking-wide text-ink/70">
               Built for
             </p>
             <div className="max-w-xl">

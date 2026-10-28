@@ -1,7 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const readLinks = [
-  { href: "/scripting-horizons", label: "Scripting Horizons" },
+  { href: "/scrhoz", label: "Scrhoz" },
   { href: "/articles", label: "Articles" },
 ];
 
@@ -9,7 +10,7 @@ const allLinks = [
   { href: "/latticaxon", label: "Latticaxon" },
   { href: "/shop", label: "Shop" },
   { href: "/exchange", label: "Exchange" },
-  { href: "/scripting-horizons", label: "Scripting Horizons" },
+  { href: "/scrhoz", label: "Scrhoz" },
   { href: "/articles", label: "Articles" },
   { href: "/newsletter", label: "Newsletter" },
   { href: "/about", label: "About" },
@@ -21,8 +22,15 @@ export default function Nav() {
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
         <Link
           href="/"
-          className="font-display text-lg font-medium tracking-tight text-ink"
+          className="inline-flex items-center gap-2.5 font-display text-lg font-medium tracking-tight text-ink"
         >
+          <Image
+            src="/bymagiq-favicon.svg"
+            alt=""
+            width={28}
+            height={28}
+            priority
+          />
           ByMagiq
         </Link>
 

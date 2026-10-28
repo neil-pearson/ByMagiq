@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function NewsletterPage() {
   return (
     <section className="mx-auto max-w-3xl px-6 py-16 sm:py-24">
-      <p className="font-mono text-[13px] uppercase tracking-wide text-signal">
+      <p className="font-mono text-[15px] uppercase tracking-wide text-signal">
         The ByMagiq Letter
       </p>
       <h1 className="mt-4 max-w-xl font-display text-3xl font-medium leading-[1.15] tracking-tight text-ink sm:text-4xl">
@@ -37,7 +37,7 @@ export default function NewsletterPage() {
           type="email"
           required
           placeholder="you@email.com"
-          className="w-full border border-line bg-transparent px-4 py-3 text-sm text-ink placeholder:text-ink/40 focus:border-ink focus:outline-none"
+          className="w-full border border-line bg-transparent px-4 py-3 text-sm text-ink placeholder:text-ink/60 focus:border-ink focus:outline-none"
         />
         <button
           type="submit"
