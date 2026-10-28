@@ -19,7 +19,7 @@ const authors = [
 
 export default function ArticlesPage() {
   return (
-    <section className="mx-auto max-w-3xl px-6 py-16 sm:py-24">
+    <section className="mx-auto max-w-5xl px-6 pb-16 pt-12 sm:pb-24 sm:pt-16">
       <p className="font-mono text-[15px] uppercase tracking-wide text-signal">
         Read — Articles
       </p>
@@ -30,7 +30,7 @@ export default function ArticlesPage() {
         ByMagiq and Scrhoz publish through Medium rather than a
         hosted blog. Pick an author below to read their latest.
       </p>
-      <ul className="mt-10 divide-y divide-line border-y border-line">
+      <ul className="mt-10 max-w-3xl divide-y divide-line border-y border-line">
         {authors.map((a) => (
           <li key={a.url}>
             <a

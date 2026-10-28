@@ -22,7 +22,7 @@ export default async function ShopPage({
     .order("created_at", { ascending: true });
 
   return (
-    <section className="mx-auto max-w-5xl px-6 py-16 sm:py-24">
+    <section className="mx-auto max-w-5xl px-6 pb-16 pt-12 sm:pb-24 sm:pt-16">
       <p className="font-mono text-[15px] uppercase tracking-wide text-signal">
         Shop
       </p>

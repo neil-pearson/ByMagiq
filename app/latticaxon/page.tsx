@@ -33,7 +33,7 @@ export default function LatticaxonPage() {
   return (
     <>
       {/* Hero */}
-      <section className="mx-auto max-w-5xl px-6 pb-16 pt-16 sm:pt-24">
+      <section className="mx-auto max-w-5xl px-6 pb-16 pt-12 sm:pt-16">
         <p className="font-mono text-[15px] uppercase tracking-wide text-signal">
           Latticaxon
         </p>
