@@ -106,8 +106,8 @@ export default function Home() {
               The ByMagiq Letter
             </p>
             <p className="mt-2 max-w-md text-lg text-paper/90">
-              One newsletter on building AI that remembers — occasional
-              dispatches from Scripting Horizons included.
+              One newsletter on building AI that remembers — plus
+              occasional picks from the Scrhoz book catalogue.
             </p>
           </div>
           <Link

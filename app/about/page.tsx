@@ -110,8 +110,8 @@ export default function AboutPage() {
               The ByMagiq Letter
             </p>
             <p className="mt-2 max-w-md text-lg text-paper/90">
-              Follow along as it&apos;s built — one newsletter, occasional
-              dispatches from Scripting Horizons included.
+              Follow along as it&apos;s built — one newsletter, plus
+              occasional picks from the Scrhoz book catalogue.
             </p>
           </div>
           <Link

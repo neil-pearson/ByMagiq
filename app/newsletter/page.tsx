@@ -4,7 +4,7 @@ import ConversionForm from "@/components/ConversionForm";
 export const metadata: Metadata = {
   title: "The ByMagiq Letter — ByMagiq",
   description:
-    "One newsletter on building AI that remembers, with occasional dispatches from Scripting Horizons.",
+    "One newsletter on building AI that remembers, with occasional picks from the Scrhoz book catalogue.",
   alternates: { canonical: "/newsletter" },
 };
 
@@ -19,7 +19,7 @@ export default function NewsletterPage() {
       </h1>
       <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink/70">
         Notes from building ByMagiq and Latticaxon in the open, plus
-        occasional dispatches from the Scripting Horizons back catalogue.
+        occasional picks from the Scrhoz book catalogue.
         No spam, unsubscribe any time.
       </p>
 
