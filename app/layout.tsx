@@ -5,6 +5,10 @@ import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { SITE_URL } from "@/lib/site";
+import { jsonLdString, siteJsonLd } from "@/lib/schema";
+
+const SITE_DESCRIPTION =
+  "ByMagiq builds tools for AI that keeps its memory. Latticaxon, the flagship product, is a local-first second brain that compounds what you teach it.";
 
 const display = Space_Grotesk({
   variable: "--font-display",
@@ -29,8 +33,7 @@ export const metadata: Metadata = {
     default: "ByMagiq — AI that remembers",
     template: "%s",
   },
-  description:
-    "ByMagiq builds tools for AI that keeps its memory. Latticaxon, the flagship product, is a local-first second brain that compounds what you teach it.",
+  description: SITE_DESCRIPTION,
   alternates: {
     canonical: "/",
   },
@@ -68,6 +71,12 @@ export default function RootLayout({
       className={`${display.variable} ${body.variable} ${mono.variable}`}
     >
       <body className="flex min-h-screen flex-col font-body antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: jsonLdString(siteJsonLd(SITE_DESCRIPTION)),
+          }}
+        />
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
