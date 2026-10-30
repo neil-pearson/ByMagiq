@@ -1,7 +1,7 @@
 /**
  * Shop catalogue: the fixed list of add-on categories and the small
  * helpers the Shop pages share. The category slugs must match the check
- * constraint on `prompts.category` in supabase-schema.sql.
+ * constraint on `prompts.category` in scripts/sql/004-add-catalogue-fields-2026-10-30.sql.
  *
  * Wording rule (GEO scope, bm-geo.md): every line here must be true when
  * the vault is released. No "best" or "leading", no promise of results.

@@ -17,7 +17,7 @@ export type Prompt = {
 
 /**
  * A Shop catalogue item. Same `prompts` table, with the catalogue columns
- * added 2026-10-30 (see supabase-schema.sql). The new fields are null until
+ * added 2026-10-30 (see scripts/sql/004-add-catalogue-fields-2026-10-30.sql). The new fields are null until
  * that migration has been run. `delivery_content` is only used on the
  * server, for an open free download; never pass it to a client component.
  */
