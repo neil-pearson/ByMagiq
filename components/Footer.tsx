@@ -14,9 +14,6 @@ export default function Footer() {
           <Link href="/shop" className="hover:text-ink">
             Shop
           </Link>
-          <Link href="/exchange" className="hover:text-ink">
-            Exchange
-          </Link>
           <Link href="/scrhoz" className="hover:text-ink">
             Scrhoz
           </Link>

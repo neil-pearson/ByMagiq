@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "About — ByMagiq",
   description:
-    "ByMagiq builds tools for AI that keeps its memory — starting with Latticaxon, a personal knowledge system, and expanding into prompts and a Latticaxon item exchange.",
+    "ByMagiq builds tools for AI that keeps its memory — starting with Latticaxon, a personal knowledge system, and expanding into prompts.",
   alternates: { canonical: "/about" },
 };
 
@@ -26,12 +26,6 @@ const makes = [
     title: "Scrhoz",
     description:
       "Our companion site — simple prompts, sheets, systems and books, including the Scripting Horizons imprint.",
-  },
-  {
-    href: "/exchange",
-    title: "Exchange",
-    description:
-      "Coming soon — a place to trade Latticaxon items: templates, modules, and system extensions.",
   },
 ];
 
@@ -60,7 +54,7 @@ export default function AboutPage() {
           <p className="font-mono text-[13px] uppercase tracking-wide text-ink/70">
             What we&apos;re building
           </p>
-          <div className="mt-6 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2">
+          <div className="mt-6 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-3">
             {makes.map((m) => (
               <Link
                 key={m.href}

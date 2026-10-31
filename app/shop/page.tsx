@@ -158,17 +158,6 @@ export default async function ShopPage({
           <ProductGrid items={uncategorised} />
         </div>
       )}
-
-      <p className="mt-14 text-base leading-relaxed text-ink/70">
-        Looking for items from other people? The{" "}
-        <Link
-          href="/exchange"
-          className="text-ink underline decoration-line underline-offset-4"
-        >
-          Exchange
-        </Link>{" "}
-        is a separate page and is not live yet.
-      </p>
     </section>
   );
 }

@@ -9,7 +9,6 @@ const readLinks = [
 const allLinks = [
   { href: "/latticaxon", label: "Latticaxon" },
   { href: "/shop", label: "Shop" },
-  { href: "/exchange", label: "Exchange" },
   { href: "/scrhoz", label: "Scrhoz" },
   { href: "/articles", label: "Articles" },
   { href: "/newsletter", label: "Newsletter" },
@@ -41,9 +40,6 @@ export default function Nav() {
           </Link>
           <Link href="/shop" className="transition-colors hover:text-ink">
             Shop
-          </Link>
-          <Link href="/exchange" className="transition-colors hover:text-ink">
-            Exchange
           </Link>
           <details className="relative">
             <summary className="cursor-pointer list-none transition-colors hover:text-ink [&::-webkit-details-marker]:hidden">
