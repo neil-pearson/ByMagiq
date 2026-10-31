@@ -1,5 +1,6 @@
 -- 004 — Catalogue fields for the add-on Shop (2026-10-30)
--- Run on production 2026-10-30. Safe to run twice.
+-- NOT YET RUN on the ByMagiq database. On 2026-10-30 it was run by mistake on the
+-- Scrhoz Supabase project (project ref starting rjuifb). Safe to run twice.
 -- Adds categories, availability and the detail-page text fields.
 -- Free means price_cents = 0. Existing rows keep category = null and show under
 -- "Prompts" on the Shop until they are categorised, moved or deactivated.
