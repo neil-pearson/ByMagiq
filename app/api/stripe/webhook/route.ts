@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 import { sendFulfillmentEmail } from "@/lib/email";
-import { supabase } from "@/lib/supabase";
+import { getAdminClient } from "@/lib/supabase-admin";
 
 export async function POST(req: NextRequest) {
   const body = await req.text();
@@ -40,17 +40,23 @@ export async function POST(req: NextRequest) {
       let deliveryContent: string | null = null;
 
       if (promptId) {
-        const { data: prompt, error } = await supabase
-          .from("prompts")
-          .select("delivery_type, delivery_content")
-          .eq("id", promptId)
-          .single();
+        try {
+          // Delivery details are not readable with the public key, so this
+          // uses the server-only service-role client.
+          const { data: prompt, error } = await getAdminClient()
+            .from("prompts")
+            .select("delivery_type, delivery_content")
+            .eq("id", promptId)
+            .single();
 
-        if (error) {
-          console.error("Could not look up delivery content for prompt", promptId, error);
-        } else {
-          deliveryType = prompt?.delivery_type ?? null;
-          deliveryContent = prompt?.delivery_content ?? null;
+          if (error) {
+            console.error("Could not look up delivery content for prompt", promptId, error);
+          } else {
+            deliveryType = prompt?.delivery_type ?? null;
+            deliveryContent = prompt?.delivery_content ?? null;
+          }
+        } catch (err) {
+          console.error("Delivery lookup failed for prompt", promptId, err);
         }
       }
 

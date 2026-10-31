@@ -2,7 +2,8 @@ import { cache } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { supabase, type Product } from "@/lib/supabase";
+import { supabase, PUBLIC_PRODUCT_COLUMNS, type Product } from "@/lib/supabase";
+import { getAdminClient } from "@/lib/supabase-admin";
 import {
   INSTALL_NOTE,
   availabilityLabel,
@@ -13,7 +14,7 @@ import {
 const getProduct = cache(async (slug: string): Promise<Product | null> => {
   const { data, error } = await supabase
     .from("prompts")
-    .select("*")
+    .select(PUBLIC_PRODUCT_COLUMNS)
     .eq("slug", slug)
     .eq("is_active", true)
     .maybeSingle();
@@ -22,8 +23,34 @@ const getProduct = cache(async (slug: string): Promise<Product | null> => {
     console.error("Could not load shop item", slug, error);
     return null;
   }
-  return (data as Product | null) ?? null;
+  return (data as unknown as Product | null) ?? null;
 });
+
+/**
+ * The link for an open free download. Delivery details are not readable with
+ * the public key, so this reads them on the server. Only ever called for a
+ * free item (price_cents = 0) that is marked available, so a paid item's
+ * file can never be handed out here.
+ */
+async function getFreeDownloadUrl(id: string): Promise<string | null> {
+  try {
+    const { data, error } = await getAdminClient()
+      .from("prompts")
+      .select("delivery_type, delivery_content")
+      .eq("id", id)
+      .maybeSingle();
+    if (error || !data) return null;
+    const content = data.delivery_content;
+    return data.delivery_type === "file" &&
+      typeof content === "string" &&
+      content.startsWith("https://")
+      ? content
+      : null;
+  } catch (err) {
+    console.error("Could not look up free download", id, err);
+    return null;
+  }
+}
 
 export async function generateMetadata({
   params,
@@ -54,14 +81,9 @@ export default async function ShopItemPage({
   // Open free download for the moment (decision 2026-10-30, task
   // bm-free-downloads). Paid checkout is not shown here; it comes back with
   // the "Re-enable the Shop Buy buttons" task.
-  const content = product.delivery_content;
   const downloadUrl =
-    isAvailable &&
-    product.price_cents === 0 &&
-    product.delivery_type === "file" &&
-    typeof content === "string" &&
-    content.startsWith("https://")
-      ? content
+    isAvailable && product.price_cents === 0
+      ? await getFreeDownloadUrl(product.id)
       : null;
 
   const facts: { label: string; value: string }[] = [

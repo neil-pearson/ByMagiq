@@ -16,12 +16,23 @@ export type Prompt = {
 };
 
 /**
- * A Shop catalogue item. Same `prompts` table, with the catalogue columns
- * added 2026-10-30 (see scripts/sql/004-add-catalogue-fields-2026-10-30.sql). The new fields are null until
- * that migration has been run. `delivery_content` is only used on the
- * server, for an open free download; never pass it to a client component.
+ * The columns of `prompts` the public (anon) key may read. Always select
+ * these by name. `delivery_type` and `delivery_content` are deliberately NOT
+ * in this list: they hold what a buyer receives, and
+ * scripts/sql/005-lock-down-delivery-columns-2026-10-31.sql stops the public
+ * key reading them. Read them only through getAdminClient()
+ * (lib/supabase-admin.ts), on the server. If you add a public column, add it
+ * here and grant it to anon in a new SQL file.
+ */
+export const PUBLIC_PRODUCT_COLUMNS =
+  "id, slug, title, description, price_cents, stripe_price_id, is_active, created_at, category, availability, requires_vault, sort_order, requirements, what_you_get, delivery_format";
+
+/**
+ * A Shop catalogue item as the public pages see it: the `prompts` table with
+ * the catalogue columns added by scripts/sql/004-add-catalogue-fields-2026-10-30.sql.
  */
 export type Product = Prompt & {
+  created_at: string;
   category: string | null;
   availability: "coming-soon" | "available" | null;
   requires_vault: boolean | null;
@@ -29,6 +40,4 @@ export type Product = Prompt & {
   requirements: string | null;
   what_you_get: string | null;
   delivery_format: string | null;
-  delivery_type: "text" | "file" | null;
-  delivery_content: string | null;
 };
