@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "About — ByMagiq",
   description:
-    "ByMagiq builds tools for AI that keeps its memory — starting with Latticaxon, a personal knowledge system, and expanding into prompts.",
+    "ByMagiq builds tools for AI that keeps its memory — starting with Latticaxon, a personal knowledge system, and expanding into playbooks and add-ons.",
   alternates: { canonical: "/about" },
 };
 
@@ -13,13 +13,13 @@ const makes = [
     href: "/latticaxon",
     title: "Latticaxon",
     description:
-      "The flagship product — a free personal knowledge and project system that keeps context across sessions, with paid modules and playbooks available to extend it.",
+      "The flagship product — a free personal knowledge and project system that keeps context across sessions, with paid modules and playbooks that will be available to extend it.",
   },
   {
     href: "/shop",
     title: "Shop",
     description:
-      "Tested prompts for the workflows that actually compound, sold directly.",
+      "Playbooks you can run in any AI, plus modules and other add-ons for Latticaxon. Everything is coming with the vault.",
   },
   {
     href: "/scrhoz",

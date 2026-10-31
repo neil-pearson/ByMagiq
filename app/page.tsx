@@ -12,9 +12,9 @@ const products = [
   {
     href: "/shop",
     eyebrow: "Shop",
-    title: "Prompts",
+    title: "Playbooks and add-ons",
     description:
-      "Tested prompts for the workflows that actually compound — research, writing, and systems work.",
+      "Playbooks you can run in any AI, plus modules and other add-ons for Latticaxon. Everything is coming with the vault.",
     cta: "Browse the shop",
   },
   {
