@@ -5,7 +5,9 @@
 -- (004 also tried to add `category`, but Scrhoz already had that column, so nothing was added or
 -- changed there. This script does NOT touch `category`.)
 --
--- STATUS: NOT YET RUN
+-- STATUS: NOT NEEDED. On 2026-10-31 Neil ran Check 1 on the Scrhoz project and none of the six
+-- columns exist (Check 2 failed with "column availability does not exist"), so there is nothing
+-- to drop. Do not run the drop. Kept as a record.
 --
 -- How to use: run the three checks one at a time (the SQL Editor shows only the last result),
 -- read the "Expect" line under each, then run the drop. The drop stops with an error, and

@@ -1,5 +1,5 @@
 -- 006 — First Shop entries: two playbooks and three vault modules (2026-10-31)
--- STATUS: NOT YET RUN
+-- STATUS: run on the ByMagiq project (reported by Neil 2026-10-31)
 -- Run on the BYMAGIQ Supabase project only. On the Scrhoz project it fails with
 -- "column price_cents does not exist" and changes nothing. Safe to run twice
 -- (existing slugs are skipped).

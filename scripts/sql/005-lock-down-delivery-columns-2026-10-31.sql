@@ -1,5 +1,6 @@
 -- 005 — Stop the public key reading delivery_type and delivery_content (2026-10-31)
--- NOT YET RUN. Run it on the ByMagiq Supabase project only (the one whose
+-- STATUS: run on the ByMagiq project (reported by Neil 2026-10-31).
+-- Run it on the ByMagiq Supabase project only (the one whose
 -- prompts table has price_cents and delivery_content), and only AFTER:
 --   1. 004 has been run on that project,
 --   2. SUPABASE_SERVICE_ROLE_KEY is set in Vercel (Production), and
