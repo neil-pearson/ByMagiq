@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { supabase, type Product } from "@/lib/supabase";
+import {
+  PUBLIC_PRODUCT_COLUMNS,
+  supabase,
+  type Product,
+} from "@/lib/supabase";
 import { CATEGORIES, availabilityLabel, priceLabel } from "@/lib/catalogue";
 
 export const metadata: Metadata = {
@@ -49,11 +53,21 @@ export default async function ShopPage({
 
   const { data, error } = await supabase
     .from("prompts")
-    .select("*")
+    .select(PUBLIC_PRODUCT_COLUMNS)
     .eq("is_active", true)
     .order("created_at", { ascending: true });
 
-  const products = (data ?? []) as Product[];
+  if (error) {
+    // Shown in the Vercel runtime logs only; the page keeps its plain message.
+    console.error("Shop query failed:", {
+      message: error.message,
+      code: error.code,
+      details: error.details,
+      hint: error.hint,
+    });
+  }
+
+  const products = (data ?? []) as unknown as Product[];
   const known = new Set<string>(CATEGORIES.map((c) => c.slug));
   const bySort = (a: Product, b: Product) =>
     (a.sort_order ?? 0) - (b.sort_order ?? 0);
