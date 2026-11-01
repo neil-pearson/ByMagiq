@@ -25,7 +25,7 @@ export type Prompt = {
  * here and grant it to anon in a new SQL file.
  */
 export const PUBLIC_PRODUCT_COLUMNS =
-  "id, slug, title, description, price_cents, stripe_price_id, is_active, created_at, category, availability, requires_vault, sort_order, requirements, what_you_get, delivery_format";
+  "id, slug, title, description, price_cents, stripe_price_id, is_active, created_at, category, availability, requires_vault, sort_order, requirements, what_you_get, delivery_format, featured";
 
 /**
  * A Shop catalogue item as the public pages see it: the `prompts` table with
@@ -40,4 +40,5 @@ export type Product = Prompt & {
   requirements: string | null;
   what_you_get: string | null;
   delivery_format: string | null;
+  featured: boolean | null;
 };

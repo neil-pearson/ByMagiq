@@ -5,7 +5,8 @@ import {
   supabase,
   type Product,
 } from "@/lib/supabase";
-import { CATEGORIES, availabilityLabel, priceLabel } from "@/lib/catalogue";
+import { CATEGORIES } from "@/lib/catalogue";
+import { ProductGrid } from "@/components/ProductGrid";
 
 export const metadata: Metadata = {
   title: "Shop — ByMagiq",
@@ -13,36 +14,6 @@ export const metadata: Metadata = {
     "Playbooks, modules, starter kits, skills and other add-ons for working with AI and the Latticaxon vault. Free and paid, coming with the vault.",
   alternates: { canonical: "/shop" },
 };
-
-function ProductCard({ p }: { p: Product }) {
-  return (
-    <Link
-      href={`/shop/${p.slug}`}
-      className="flex flex-col justify-between gap-6 bg-paper p-7 transition-colors hover:bg-signal-dim"
-    >
-      <div>
-        <h3 className="font-display text-xl font-medium text-ink">{p.title}</h3>
-        <p className="mt-3 text-sm leading-relaxed text-ink/65">
-          {p.description}
-        </p>
-      </div>
-      <div className="flex items-center justify-between font-mono text-[13px] uppercase tracking-wide text-ink/70">
-        <span>{priceLabel(p.price_cents)}</span>
-        <span>{availabilityLabel(p.availability)}</span>
-      </div>
-    </Link>
-  );
-}
-
-function ProductGrid({ items }: { items: Product[] }) {
-  return (
-    <div className="mt-6 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2">
-      {items.map((p) => (
-        <ProductCard key={p.id} p={p} />
-      ))}
-    </div>
-  );
-}
 
 export default async function ShopPage({
   searchParams,
@@ -71,6 +42,7 @@ export default async function ShopPage({
   const known = new Set<string>(CATEGORIES.map((c) => c.slug));
   const bySort = (a: Product, b: Product) =>
     (a.sort_order ?? 0) - (b.sort_order ?? 0);
+  const featured = products.filter((p) => p.featured).sort(bySort);
   // Rows without a recognised category (the original single prompts, or any
   // row added before the catalogue columns exist) keep their own section so
   // nothing disappears from the live Shop until it is decided what to do
@@ -93,21 +65,6 @@ export default async function ShopPage({
         is coming with the vault.
       </p>
 
-      <nav
-        aria-label="Shop categories"
-        className="mt-8 flex flex-wrap gap-x-6 gap-y-2 font-mono text-[13px] uppercase tracking-wide text-ink/70"
-      >
-        {CATEGORIES.map((c) => (
-          <a
-            key={c.slug}
-            href={`#${c.slug}`}
-            className="transition-colors hover:text-ink"
-          >
-            {c.name}
-          </a>
-        ))}
-      </nav>
-
       {checkout === "success" && (
         <p className="mt-8 border border-line bg-signal-dim px-4 py-3 font-mono text-[13px] text-ink">
           Payment received — check your email for the download.
@@ -126,29 +83,62 @@ export default async function ShopPage({
         </p>
       )}
 
-      {!error &&
-        CATEGORIES.map((c) => {
-          const items = products
-            .filter((p) => p.category === c.slug)
-            .sort(bySort);
-          return (
-            <div key={c.slug} id={c.slug} className="mt-14 scroll-mt-8">
-              <h2 className="font-display text-2xl font-medium text-ink">
-                {c.name}
-              </h2>
-              <p className="mt-2 max-w-xl text-base leading-relaxed text-ink/70">
-                {c.blurb}
-              </p>
-              {items.length > 0 ? (
-                <ProductGrid items={items} />
+      {!error && featured.length > 0 && (
+        <div className="mt-14">
+          <h2 className="font-display text-2xl font-medium text-ink">
+            Featured
+          </h2>
+          <ProductGrid items={featured} />
+        </div>
+      )}
+
+      {!error && (
+        <div className="mt-14">
+          <h2 className="font-display text-2xl font-medium text-ink">
+            Browse by category
+          </h2>
+          <div className="mt-6 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2">
+            {CATEGORIES.map((c) => {
+              const count = products.filter(
+                (p) => p.category === c.slug
+              ).length;
+              const body = (
+                <>
+                  <div>
+                    <h3 className="font-display text-xl font-medium text-ink">
+                      {c.name}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-ink/65">
+                      {c.blurb}
+                    </p>
+                  </div>
+                  <p className="font-mono text-[13px] uppercase tracking-wide text-ink/70">
+                    {count > 0
+                      ? `${count} ${count === 1 ? "item" : "items"}`
+                      : "Nothing listed yet"}
+                  </p>
+                </>
+              );
+              return count > 0 ? (
+                <Link
+                  key={c.slug}
+                  href={`/shop/${c.slug}`}
+                  className="flex flex-col justify-between gap-6 bg-paper p-7 transition-colors hover:bg-signal-dim"
+                >
+                  {body}
+                </Link>
               ) : (
-                <p className="mt-6 font-mono text-[13px] uppercase tracking-wide text-ink/70">
-                  Nothing listed yet — coming with the vault.
-                </p>
-              )}
-            </div>
-          );
-        })}
+                <div
+                  key={c.slug}
+                  className="flex flex-col justify-between gap-6 bg-paper p-7"
+                >
+                  {body}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {!error && uncategorised.length > 0 && (
         <div id="prompts" className="mt-14 scroll-mt-8">

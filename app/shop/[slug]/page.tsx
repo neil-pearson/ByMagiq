@@ -10,6 +10,7 @@ import {
   categoryFor,
   priceLabel,
 } from "@/lib/catalogue";
+import { CategoryView, getCategoryItems } from "./CategoryView";
 
 const getProduct = cache(async (slug: string): Promise<Product | null> => {
   const { data, error } = await supabase
@@ -58,6 +59,23 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+
+  // /shop/<category> is a category page. Categories are checked before
+  // items, and scripts/sql/008 stops an item using a category's slug.
+  const category = categoryFor(slug);
+  if (category) {
+    const items = await getCategoryItems(category.slug);
+    const hasItems = items !== null && items.length > 0;
+    return {
+      title: `${category.name} — ByMagiq Shop`,
+      description: category.blurb,
+      alternates: { canonical: `/shop/${category.slug}` },
+      // A category with no items (or one that failed to load) stays out of
+      // search until it has something in it.
+      robots: hasItems ? undefined : { index: false, follow: true },
+    };
+  }
+
   const product = await getProduct(slug);
   if (!product) return { title: "Shop — ByMagiq" };
   return {
@@ -73,6 +91,13 @@ export default async function ShopItemPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+
+  const categoryPage = categoryFor(slug);
+  if (categoryPage) {
+    const items = await getCategoryItems(categoryPage.slug);
+    return <CategoryView category={categoryPage} items={items} />;
+  }
+
   const product = await getProduct(slug);
   if (!product) notFound();
 
@@ -105,7 +130,7 @@ export default async function ShopItemPage({
     <section className="mx-auto max-w-5xl px-6 pb-16 pt-12 sm:pb-24 sm:pt-16">
       <p className="font-mono text-[15px] uppercase tracking-wide text-signal">
         <Link
-          href={category ? `/shop#${category.slug}` : "/shop"}
+          href={category ? `/shop/${category.slug}` : "/shop"}
           className="transition-colors hover:text-ink"
         >
           Shop{category ? ` / ${category.name}` : ""}
