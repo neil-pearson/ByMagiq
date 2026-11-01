@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
-import { sendFulfillmentEmail } from "@/lib/email";
-import { getAdminClient } from "@/lib/supabase-admin";
+import { fulfilCheckoutSession } from "@/lib/fulfilment";
+import { getFulfilmentDeps } from "@/lib/fulfilment-deps";
 
 export async function POST(req: NextRequest) {
   const body = await req.text();
@@ -12,63 +12,44 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Missing signature" }, { status: 400 });
   }
 
+  const secret = process.env.STRIPE_WEBHOOK_SECRET;
+  if (!secret) {
+    console.error("STRIPE_WEBHOOK_SECRET is not set");
+    return NextResponse.json(
+      { error: "Webhook not configured" },
+      { status: 500 }
+    );
+  }
+
   let event: Stripe.Event;
   try {
-    event = stripe.webhooks.constructEvent(
-      body,
-      signature,
-      process.env.STRIPE_WEBHOOK_SECRET!
-    );
+    event = stripe.webhooks.constructEvent(body, signature, secret);
   } catch (err) {
     console.error("Stripe webhook signature verification failed", err);
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
   }
 
-  if (event.type === "checkout.session.completed") {
-    const session = event.data.object as Stripe.Checkout.Session;
-    const email = session.customer_details?.email;
-    const promptId = session.metadata?.promptId;
-    const promptTitle = session.metadata?.promptTitle ?? "your purchase";
+  if (event.type !== "checkout.session.completed") {
+    return NextResponse.json({ received: true });
+  }
 
-    if (!email) {
-      console.error(
-        "checkout.session.completed had no customer email — skipping fulfillment",
-        session.id
+  const session = event.data.object as Stripe.Checkout.Session;
+
+  try {
+    const result = await fulfilCheckoutSession(session, getFulfilmentDeps());
+
+    if (result === "retry") {
+      // Delivery did not complete. The order is recorded as failed; an error
+      // status makes Stripe send this event again (safe: a delivered order is
+      // never delivered twice).
+      return NextResponse.json(
+        { error: "Delivery not completed" },
+        { status: 500 }
       );
-    } else {
-      let deliveryType: "text" | "file" | null = null;
-      let deliveryContent: string | null = null;
-
-      if (promptId) {
-        try {
-          // Delivery details are not readable with the public key, so this
-          // uses the server-only service-role client.
-          const { data: prompt, error } = await getAdminClient()
-            .from("prompts")
-            .select("delivery_type, delivery_content")
-            .eq("id", promptId)
-            .single();
-
-          if (error) {
-            console.error("Could not look up delivery content for prompt", promptId, error);
-          } else {
-            deliveryType = prompt?.delivery_type ?? null;
-            deliveryContent = prompt?.delivery_content ?? null;
-          }
-        } catch (err) {
-          console.error("Delivery lookup failed for prompt", promptId, err);
-        }
-      }
-
-      try {
-        await sendFulfillmentEmail({ to: email, promptTitle, deliveryType, deliveryContent });
-      } catch (err) {
-        // Payment already succeeded — don't fail the webhook response over
-        // an email error, or Stripe will keep retrying a delivery that
-        // will keep failing for the same reason.
-        console.error("Fulfillment email failed to send", session.id, err);
-      }
     }
+  } catch (err) {
+    console.error("Fulfilment threw", session.id, err);
+    return NextResponse.json({ error: "Fulfilment error" }, { status: 500 });
   }
 
   return NextResponse.json({ received: true });

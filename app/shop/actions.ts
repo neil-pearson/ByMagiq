@@ -3,19 +3,38 @@
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import { stripe } from "@/lib/stripe";
-import { supabase } from "@/lib/supabase";
+import { PUBLIC_PRODUCT_COLUMNS, supabase, type Product } from "@/lib/supabase";
 
+/**
+ * Starts a Stripe Checkout for one paid Shop item. Prices are in AUD, to
+ * match what the Shop shows (A$) and the Product markup.
+ *
+ * Reads the item with the public key and only the public columns (the
+ * delivery columns are not readable with it, scripts/sql/005), and only
+ * sells an item that is active, marked available and has a price.
+ */
 export async function createCheckoutSession(formData: FormData) {
-  const promptId = formData.get("promptId") as string;
+  const promptId = formData.get("promptId");
+  if (typeof promptId !== "string" || promptId === "") {
+    throw new Error("Missing item");
+  }
 
-  const { data: prompt, error } = await supabase
+  const { data, error } = await supabase
     .from("prompts")
-    .select("*")
+    .select(PUBLIC_PRODUCT_COLUMNS)
     .eq("id", promptId)
-    .single();
+    .eq("is_active", true)
+    .maybeSingle();
 
+  const prompt = data as unknown as Product | null;
   if (error || !prompt) {
-    throw new Error("Prompt not found");
+    throw new Error("Item not found");
+  }
+  if (prompt.availability !== "available") {
+    throw new Error("This item is not available yet");
+  }
+  if (!(prompt.price_cents > 0)) {
+    throw new Error("This item is not for sale");
   }
 
   const headersList = await headers();
@@ -28,7 +47,7 @@ export async function createCheckoutSession(formData: FormData) {
     line_items: [
       {
         price_data: {
-          currency: "gbp",
+          currency: "aud",
           product_data: {
             name: prompt.title,
             description: prompt.description,
