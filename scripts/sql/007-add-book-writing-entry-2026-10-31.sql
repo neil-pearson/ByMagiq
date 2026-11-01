@@ -1,5 +1,5 @@
 -- 007 — Shop entry for the Book Writing vault module (2026-10-31)
--- STATUS: NOT YET RUN
+-- STATUS: run on the ByMagiq project (Neil saw Book Writing in the Shop 2026-10-31)
 -- Run on the BYMAGIQ Supabase project only. On the Scrhoz project it fails with
 -- "column price_cents does not exist" and changes nothing. Safe to run twice
 -- (an existing slug is skipped).
