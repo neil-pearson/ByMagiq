@@ -25,19 +25,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: route.priority,
   }));
 
-  // Only categories with at least one active item get a page in the sitemap
-  // (an empty category page is noindex).
+  // Category pages with at least one active item, and every active item
+  // page, come from the same Supabase list the Shop renders. An empty
+  // category page is noindex, so it stays out.
   const { data, error } = await supabase
     .from("prompts")
-    .select("category")
+    .select("slug, category")
     .eq("is_active", true);
 
   if (error) {
-    console.error("Sitemap: could not load shop categories", error);
+    console.error("Sitemap: could not load shop items", error);
     return entries;
   }
 
-  const used = new Set((data ?? []).map((r) => r.category as string | null));
+  const rows = (data ?? []) as { slug: string; category: string | null }[];
+  const used = new Set(rows.map((r) => r.category));
   for (const c of CATEGORIES) {
     if (used.has(c.slug)) {
       entries.push({
@@ -47,6 +49,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.7,
       });
     }
+  }
+  for (const r of rows) {
+    entries.push({
+      url: new URL(`/shop/${r.slug}`, SITE_URL).toString(),
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.6,
+    });
   }
   return entries;
 }

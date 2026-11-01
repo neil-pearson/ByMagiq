@@ -6,10 +6,12 @@ import { supabase, PUBLIC_PRODUCT_COLUMNS, type Product } from "@/lib/supabase";
 import { getAdminClient } from "@/lib/supabase-admin";
 import {
   INSTALL_NOTE,
+  SHOW_PRICES,
   availabilityLabel,
   categoryFor,
   priceLabel,
 } from "@/lib/catalogue";
+import { jsonLdString, productJsonLd } from "@/lib/schema";
 import { CategoryView, getCategoryItems } from "./CategoryView";
 
 const getProduct = cache(async (slug: string): Promise<Product | null> => {
@@ -111,6 +113,21 @@ export default async function ShopItemPage({
       ? await getFreeDownloadUrl(product.id)
       : null;
 
+  // Product/Offer markup only for an available item whose price is visible
+  // on this page (free items show "Free"; paid prices only when SHOW_PRICES).
+  // A coming-soon item gets no Product markup (bm-geo.md, B design choices).
+  const priceVisible = product.price_cents === 0 || SHOW_PRICES;
+  const jsonLd =
+    isAvailable && priceVisible
+      ? productJsonLd({
+          slug: product.slug,
+          title: product.title,
+          description: product.description,
+          priceCents: product.price_cents,
+          categoryName: category?.name ?? null,
+        })
+      : null;
+
   const facts: { label: string; value: string }[] = [
     { label: "Category", value: category?.name ?? "Prompt" },
     { label: "Price", value: priceLabel(product.price_cents) },
@@ -128,6 +145,12 @@ export default async function ShopItemPage({
 
   return (
     <section className="mx-auto max-w-5xl px-6 pb-16 pt-12 sm:pb-24 sm:pt-16">
+      {jsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }}
+        />
+      )}
       <p className="font-mono text-[15px] uppercase tracking-wide text-signal">
         <Link
           href={category ? `/shop/${category.slug}` : "/shop"}

@@ -20,7 +20,8 @@ One file per change to the database. Run each in the Supabase SQL Editor, in num
 | `005-lock-down-delivery-columns-2026-10-31.sql` | Stops the public key reading `delivery_type` and `delivery_content` | Yes (reported by Neil 2026-10-31) |
 | `006-add-first-shop-entries-2026-10-31.sql` | Two playbooks and three vault modules, paid at $9, shown as coming with the vault | Yes (reported by Neil 2026-10-31); ByMagiq project only |
 | `007-add-book-writing-entry-2026-10-31.sql` | Book Writing vault module, paid at $9, shown as coming with the vault | Yes (Neil saw Book Writing in the Shop 2026-10-31); ByMagiq project only |
-| `008-add-featured-and-slug-guard-2026-11-01.sql` | `featured` column (readable by the public key) and a check that no item slug equals a category slug | **Not yet.** Run it before deploying the category pages code; ByMagiq project only |
+| `008-add-featured-and-slug-guard-2026-11-01.sql` | `featured` column (readable by the public key) and a check that no item slug equals a category slug | Yes (Neil reported the category pages work, 2026-11-01); ByMagiq project only |
+| `009-hide-single-prompts-2026-11-01.sql` | Hides the 8 old single prompts (`is_active = false`, nothing deleted) | Yes (Neil reported it run, 2026-11-01); ByMagiq project only |
 | `scrhoz-cleanup-drop-004-columns-2026-10-31.sql` | Drops the six columns 004 added to the Scrhoz `prompts` table. Runs on the **Scrhoz** project, not ByMagiq | **Not needed.** Check 1 on the Scrhoz project on 2026-10-31 showed none of the six columns exist; nothing to drop |
 
 Keep this table up to date when you add a file. Each script must be run on the right Supabase project: the ByMagiq project's `prompts` table has `price_cents` and `delivery_content`; the Scrhoz project has a different `prompts` table. Check the project name before running anything. The long `delivery_content` text for each prompt was entered directly in Supabase, so it is not in these scripts.
