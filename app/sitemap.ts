@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
 import { supabase } from "@/lib/supabase";
 import { CATEGORIES } from "@/lib/catalogue";
+import { LEGAL_READY } from "@/lib/legal";
 
 // Category pages are added from the database, so refresh hourly instead of
 // freezing the list at build time.
@@ -24,6 +25,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: route.changeFrequency,
     priority: route.priority,
   }));
+
+  // The Terms and Privacy pages are a hidden draft until the seller details
+  // are set (lib/legal.ts), so they are only listed once they are live.
+  if (LEGAL_READY) {
+    for (const path of ["/terms", "/privacy"]) {
+      entries.push({
+        url: new URL(path, SITE_URL).toString(),
+        lastModified: new Date(),
+        changeFrequency: "yearly",
+        priority: 0.3,
+      });
+    }
+  }
 
   // Category pages with at least one active item, and every active item
   // page, come from the same Supabase list the Shop renders. An empty

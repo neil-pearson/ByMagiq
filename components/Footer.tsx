@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LEGAL, LEGAL_READY } from "@/lib/legal";
 
 export default function Footer() {
   return (
@@ -26,6 +27,20 @@ export default function Footer() {
           <Link href="/about" className="hover:text-ink">
             About
           </Link>
+          {/* Legal links appear once the seller details are set (lib/legal.ts). */}
+          {LEGAL_READY && (
+            <>
+              <Link href="/terms" className="hover:text-ink">
+                Terms
+              </Link>
+              <Link href="/privacy" className="hover:text-ink">
+                Privacy
+              </Link>
+              <a href={`mailto:${LEGAL.contactEmail}`} className="hover:text-ink">
+                Contact
+              </a>
+            </>
+          )}
         </nav>
       </div>
     </footer>
