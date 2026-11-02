@@ -6,6 +6,7 @@ import {
   type Product,
 } from "@/lib/supabase";
 import { CATEGORIES } from "@/lib/catalogue";
+import { LEGAL_READY } from "@/lib/legal";
 import { ProductGrid } from "@/components/ProductGrid";
 
 export const metadata: Metadata = {
@@ -82,6 +83,51 @@ export default async function ShopPage({
           be set up yet.
         </p>
       )}
+
+      {/* How the Shop works (GEO C): plain facts that stay true as items are added */}
+      <dl className="mt-10 grid max-w-xl gap-px overflow-hidden border border-line bg-line">
+        {[
+          {
+            label: "Prices",
+            value: "In Australian dollars. Some items are free.",
+          },
+          {
+            label: "Delivery",
+            value:
+              "Digital, by email: text in the email or a download link. Each item page says what you receive.",
+          },
+          {
+            label: "Availability",
+            value:
+              "Each item shows whether it is available or coming with the vault.",
+          },
+        ].map((f) => (
+          <div
+            key={f.label}
+            className="grid gap-1 bg-paper px-5 py-4 sm:grid-cols-[8rem_1fr] sm:gap-4"
+          >
+            <dt className="font-mono text-[13px] uppercase tracking-wide text-ink/70">
+              {f.label}
+            </dt>
+            <dd className="text-sm leading-relaxed text-ink">{f.value}</dd>
+          </div>
+        ))}
+        {LEGAL_READY && (
+          <div className="grid gap-1 bg-paper px-5 py-4 sm:grid-cols-[8rem_1fr] sm:gap-4">
+            <dt className="font-mono text-[13px] uppercase tracking-wide text-ink/70">
+              Refunds
+            </dt>
+            <dd className="text-sm leading-relaxed text-ink">
+              A 14-day change-of-mind refund, plus your rights under Australian
+              Consumer Law. See the{" "}
+              <Link href="/terms" className="underline hover:text-ink">
+                terms of sale
+              </Link>
+              .
+            </dd>
+          </div>
+        )}
+      </dl>
 
       {!error && featured.length > 0 && (
         <div className="mt-14">

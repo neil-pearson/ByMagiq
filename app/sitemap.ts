@@ -13,6 +13,7 @@ const routes = [
   { path: "/about", priority: 0.6, changeFrequency: "monthly" as const },
   { path: "/latticaxon", priority: 0.9, changeFrequency: "weekly" as const },
   { path: "/shop", priority: 0.9, changeFrequency: "weekly" as const },
+  { path: "/faq", priority: 0.7, changeFrequency: "monthly" as const },
   { path: "/newsletter", priority: 0.5, changeFrequency: "monthly" as const },
   { path: "/scrhoz", priority: 0.5, changeFrequency: "monthly" as const },
   { path: "/articles", priority: 0.4, changeFrequency: "monthly" as const },

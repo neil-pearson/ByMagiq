@@ -29,6 +29,28 @@ const steps = [
   },
 ];
 
+const facts = [
+  {
+    label: "Runs on",
+    value: "Obsidian, a local plain-text note app.",
+  },
+  { label: "AI layer", value: "Claude." },
+  { label: "Base vault", value: "Free." },
+  {
+    label: "Modules and playbooks",
+    value: "Sold individually, and some are free.",
+  },
+  {
+    label: "Your data",
+    value:
+      "Plain-text files in your own vault, readable without us. What you share with Claude is handled under Claude's own terms.",
+  },
+  {
+    label: "Built for",
+    value: "Solo builders running more than one project at once.",
+  },
+];
+
 export default function LatticaxonPage() {
   return (
     <>
@@ -110,6 +132,28 @@ export default function LatticaxonPage() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Facts (GEO C): plain facts that stay true at release */}
+      <section className="border-t border-line">
+        <div className="mx-auto max-w-5xl px-6 py-16">
+          <p className="font-mono text-[13px] uppercase tracking-wide text-ink/70">
+            Latticaxon at a glance
+          </p>
+          <dl className="mt-6 grid gap-px overflow-hidden border border-line bg-line">
+            {facts.map((f) => (
+              <div
+                key={f.label}
+                className="grid gap-1 bg-paper px-5 py-4 sm:grid-cols-[13rem_1fr] sm:gap-4"
+              >
+                <dt className="font-mono text-[13px] uppercase tracking-wide text-ink/70">
+                  {f.label}
+                </dt>
+                <dd className="text-sm leading-relaxed text-ink">{f.value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 

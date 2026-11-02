@@ -45,6 +45,22 @@ export function jsonLdString(data: unknown): string {
   return JSON.stringify(data).replace(/</g, "\\u003c");
 }
 
+/**
+ * FAQPage markup (bm-geo-c). Pass the same list the /faq page renders, so
+ * the markup matches the visible text exactly.
+ */
+export function faqJsonLd(items: { question: string; answer: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((i) => ({
+      "@type": "Question",
+      name: i.question,
+      acceptedAnswer: { "@type": "Answer", text: i.answer },
+    })),
+  };
+}
+
 export type ShopProductSchemaInput = {
   slug: string;
   title: string;

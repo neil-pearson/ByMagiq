@@ -27,6 +27,9 @@ export default function Footer() {
           <Link href="/about" className="hover:text-ink">
             About
           </Link>
+          <Link href="/faq" className="hover:text-ink">
+            FAQ
+          </Link>
           {/* Legal links appear once the seller details are set (lib/legal.ts). */}
           {LEGAL_READY && (
             <>

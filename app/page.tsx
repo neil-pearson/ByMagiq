@@ -27,6 +27,29 @@ const products = [
   },
 ];
 
+const glance = [
+  { label: "What it is", value: "Tools for AI that keeps its memory." },
+  {
+    label: "Flagship",
+    value:
+      "Latticaxon, a personal knowledge and project system that runs on Obsidian, with Claude as the AI layer. The base vault is free.",
+  },
+  {
+    label: "Shop",
+    value:
+      "Playbooks, modules and other add-ons, some free and some paid. Each item shows whether it is available or coming with the vault.",
+  },
+  {
+    label: "Who it's for",
+    value: "Solo builders running more than one project at once.",
+  },
+  {
+    label: "Prices and delivery",
+    value:
+      "Prices are in Australian dollars. Products are delivered digitally by email.",
+  },
+];
+
 export default function Home() {
   return (
     <>
@@ -62,6 +85,28 @@ export default function Home() {
           </div>
 
           <LatticeMark />
+        </div>
+      </section>
+
+      {/* At a glance (GEO C): plain facts that stay true as products are added */}
+      <section className="border-t border-line">
+        <div className="mx-auto max-w-5xl px-6 py-16">
+          <p className="font-mono text-[13px] uppercase tracking-wide text-ink/70">
+            ByMagiq at a glance
+          </p>
+          <dl className="mt-6 grid gap-px overflow-hidden border border-line bg-line">
+            {glance.map((g) => (
+              <div
+                key={g.label}
+                className="grid gap-1 bg-paper px-5 py-4 sm:grid-cols-[11rem_1fr] sm:gap-4"
+              >
+                <dt className="font-mono text-[13px] uppercase tracking-wide text-ink/70">
+                  {g.label}
+                </dt>
+                <dd className="text-sm leading-relaxed text-ink">{g.value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 
