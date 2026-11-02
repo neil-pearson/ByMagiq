@@ -6,7 +6,7 @@ const products = [
     eyebrow: "Flagship product",
     title: "Latticaxon",
     description:
-      "A local-first second brain. It keeps what you teach it across every session, so your AI stops re-learning your context from zero each time.",
+      "A personal knowledge and project system on Obsidian, with Claude as the AI layer. It keeps what you teach it across every session, so your AI stops re-learning your context from zero each time.",
     cta: "Get Latticaxon",
   },
   {
@@ -65,8 +65,9 @@ export default function Home() {
             </h1>
             <p className="mt-5 max-w-md text-lg leading-relaxed text-ink/70">
               ByMagiq builds tools for AI that keeps its memory. Latticaxon,
-              our flagship product, is a local-first second brain that
-              compounds what you teach it — instead of starting over.
+              our flagship product, is a personal knowledge and project
+              system on Obsidian, with Claude as the AI layer. It compounds
+              what you teach it — instead of starting over.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link

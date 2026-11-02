@@ -8,7 +8,7 @@ import { SITE_URL } from "@/lib/site";
 import { jsonLdString, siteJsonLd } from "@/lib/schema";
 
 const SITE_DESCRIPTION =
-  "ByMagiq builds tools for AI that keeps its memory. Latticaxon, the flagship product, is a local-first second brain that compounds what you teach it.";
+  "ByMagiq builds tools for AI that keeps its memory. Latticaxon, the flagship product, is a personal knowledge and project system on Obsidian, with Claude as the AI layer.";
 
 const display = Space_Grotesk({
   variable: "--font-display",
@@ -44,15 +44,13 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "ByMagiq",
     title: "ByMagiq — AI that remembers",
-    description:
-      "ByMagiq builds tools for AI that keeps its memory. Latticaxon, the flagship product, is a local-first second brain that compounds what you teach it.",
+    description: SITE_DESCRIPTION,
     url: "/",
   },
   twitter: {
     card: "summary_large_image",
     title: "ByMagiq — AI that remembers",
-    description:
-      "ByMagiq builds tools for AI that keeps its memory. Latticaxon, the flagship product, is a local-first second brain that compounds what you teach it.",
+    description: SITE_DESCRIPTION,
   },
   robots: {
     index: true,
