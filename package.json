@@ -10,6 +10,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@next/third-parties": "^16.4.5",
     "@stripe/stripe-js": "^9.9.0",
     "@supabase/supabase-js": "^2.110.3",
     "@vercel/analytics": "^2.0.1",

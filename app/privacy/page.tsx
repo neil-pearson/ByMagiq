@@ -33,7 +33,7 @@ const sections: LegalSection[] = [
     paragraphs: [
       "Your email address, when you subscribe to the newsletter or join the Latticaxon waitlist.",
       "When you buy a product: your email address (given at checkout), the product you bought, the amount, and the status of the order. Your card details go to Stripe and are not seen or stored by us.",
-      "Basic, combined visit statistics for the website, collected through Vercel Analytics.",
+      "Visit information for the website, collected through Vercel Web Analytics (combined statistics, no cookies) and Google Analytics (the pages you view, roughly where you are, your device and browser type, and how you arrived; it uses cookies or similar identifiers).",
     ],
   },
   {
@@ -45,7 +45,7 @@ const sections: LegalSection[] = [
   {
     heading: "Who handles it for us",
     paragraphs: [
-      "We use Stripe for payments, Resend to send purchase emails, MailerLite for the newsletter and waitlist, Supabase for our database, and Vercel for hosting and analytics. They handle information on our behalf, and some of them may store it outside Australia.",
+      "We use Stripe for payments, Resend to send purchase emails, MailerLite for the newsletter and waitlist, Supabase for our database, Google for Google Analytics, and Vercel for hosting and Vercel Web Analytics. They handle information on our behalf, and some of them may store it outside Australia.",
     ],
   },
   {
