@@ -69,6 +69,7 @@ const sections: LegalSection[] = [
         concern, you can complain to the Office of the Australian Information
         Commissioner at oaic.gov.au.
       </>,
+      "You can block or delete cookies in your browser settings, and you can use Google's opt-out tools for Analytics.",
     ],
   },
   {
